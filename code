@@ -16,28 +16,21 @@ class TicTacToe:
         self.players = None
         self.x = 0
         self.o = 0
-        self.command()
-        self.reshape()
-        self.output()
-        self.game()
 
     def command(self):
+        self.reshape()
+        self.output()
         while True:
-            try:
-                com = [str(x) for x in input("Input command: ").strip().split(" ")]
-            except ValueError:
-                print("Bad parameters!")
-            except EOFError:
+            com = [str(x) for x in input("Input command: ").strip().split(" ")]
+            if com[0] == "exit":
+                exit()
+            elif len(com) != 3 or com[0] != "start" \
+                    or not all(elements in TicTacToe.commands[2:] for elements in com[1:]):
                 print("Bad parameters!")
             else:
-                if com[0] == "exit":
-                    exit()
-                elif len(com) != 3 or com[0] != "start" \
-                        or not all(elements in TicTacToe.commands[2:] for elements in com[1:]):
-                    print("Bad parameters!")
-                else:
-                    self.players = com[1:]
-                    break
+                self.players = com[1:]
+                break
+         self.game()
 
     def game(self):
         if all(x == "user" for x in self.players):
@@ -229,5 +222,10 @@ class TicTacToe:
 
 
 # start of the game
-TicTacToe()
+def main():
+    game = TicTacToe()
+    game.command()
+    
 
+if __name__ == '__main__':
+    main()
