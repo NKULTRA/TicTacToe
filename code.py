@@ -21,7 +21,7 @@ class TicTacToe:
         self.reshape()
         self.output()
         while True:
-            com = [str(x) for x in input("Input command: ").strip().split(" ")]
+            com = [x for x in input("Input command: ").strip().split(" ")]
             if com[0] == "exit":
                 exit()
             elif len(com) != 3 or com[0] != "start" \
@@ -218,7 +218,8 @@ class TicTacToe:
             print("O wins")
         elif self.status(self.cells) == 3:
             print("Draw")
-        TicTacToe()
+        again = TicTacToe()
+        again.command()
 
 
 # start of the game
